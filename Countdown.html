@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>绚丽的倒计时效果</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<canvas id="canvas" style="border:1px solid red; margin:0 auto;">
+			当前浏览器不支持canvas,请更换浏览器后再试!
+		</canvas>
+
+		<script>
+
+		//  S  绘制七巧板
+			var tangram = [
+				{p:[{x:0, y:0}, {x:800, y:0}, {x:400, y:250}], color:"#caff67"},
+				{p:[{x:0, y:0}, {x:400, y:250}, {x:0, y:500}], color:"#67cebf"},
+				{p:[{x:800, y:0}, {x:800, y:250}, {x:400, y:450}], color:"#ef3d61"},
+				{p:[{x:400, y:200}, {x:400, y:450}, {x:400, y:250}], color:"#f9f51a"},
+				{p:[{x:400, y:250}, {x:400, y:450}, {x:200, y:450}], color:"#a5940c"},
+				{p:[{x:200, y:450}, {x:400, y:500}, {x:0, y:500}], color:"#fa8ecc"},
+				{p:[{x:800, y:250}, {x:800, y:500}, {x:400, y:500}], color:"#f6ca29"}
+
+			]
+
+			window.onload = function(){
+				var canvas = document.getElementById('canvas');
+				// 注意，是不加单位的，而且不建议在css中设置宽高。最好是调用width和height这两个属性
+				canvas.width = 800;
+				canvas.height = 500;
+
+				if (canvas.getContext('2d')) { //判断该浏览器是否兼容canvas
+					var context = canvas.getContext('2d');
+					for (var i = 0; i <= tangram.length - 1; i++) {
+						draw(tangram[i], context);
+					};
+
+					function draw(piece, cxt){
+						cxt.beginPath();
+						cxt.moveTo(piece.p[0].x, piece.p[0].y);
+						for (var i = 0; i <= piece.p.length - 1; i++) {
+							cxt.lineTo(piece.p[i].x, piece.p[i].y);
+						}
+						
+						cxt.closePath();
+						cxt.fillStyle = piece.color;
+						cxt.fill();
+
+					}
+				//  E  绘制七巧板
+
+
+				// // S 使用context绘制 直线和三角形
+					// // 先设置状态
+					// context.beginPath();
+					// context.moveTo(100, 100);
+					// context.lineTo(700, 700);
+					// context.lineTo(700, 100);
+					// context.lineTo(100, 100);
+					// context.closePath();
+					// context.lineWidth = 10;
+					// context.strokeStyle = "red";
+					// context.stroke(); // 笔画 绘制线条
+
+					// context.beginPath();
+					// context.moveTo(10, 200);
+					// context.lineTo(520, 500);
+					// context.closePath();
+					// context.lineWidth = 1;
+					// context.strokeStyle = "black";
+					// // context.fillStyle = "red";
+					// // context.fill();
+					// context.stroke(); // 笔画 绘制线条
+				// // E 使用context绘制 直线和三角形
+
+
+				}
+				else{
+					alert('当前浏览器不支持canvas,请更换浏览器后再试!');
+				}
+			}
+		</script>
+	</body> 
+</html>
